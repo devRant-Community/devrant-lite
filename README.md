@@ -30,7 +30,7 @@ npm install devrant-lite
 
 Then you can include the following at the top of your code:
 
-```es6
+```javascript
 import DevRant from 'devrant-lite';
 
 const client = DevRant.withCredentials('username', 'password');
@@ -80,38 +80,38 @@ There are three ways of authentication:
 
 ## Methods
 
-### new DevRant(options)
+### `new DevRant(options)`
 
 The constructor accepts an `options` object with the following options:
 
-#### `baseUrl`
+##### `options.baseUrl`
 
 Sets the base url for the api.
 Useful for proxying or testing.
 Default: `'https://devrant.com/api'`
 
-#### `app`
+##### `options.app`
 
 Sets the app ID to use.
 The app id will be sent with every request.
 Default: `3`
 
-#### `plat`
+##### `options.plat`
 
 Similar as the app ID, this sets the platform ID,
 which will also be sent with every request.
 Default: `3`
 
-### DevRant.withCredentials(username, password, options)
+### `DevRant.withCredentials(username, password, options)`
 
 A helper function which creates a new instance of the `DevRant` class and then sends a request to the `users/auth-token` endpoint to get an auth token.
 When the request was successful it sets the auth token with the `setAuthToken(auth_token)` method.
 
-### DevRant.withAuthToken(auth_token, options)
+### `DevRant.withAuthToken(auth_token, options)`
 
 A helper function which creates a new instance of the `DevRant` class and then sets the auth token with the `setAuthToken(auth_token)` method.
 
-### client.get(endpoint, parameters)
+### `client.get(endpoint, parameters)`
 
 Use the `post` method for actions that get state.
 Returns a Promise resolving to the API response object, or rejecting on error.
@@ -130,7 +130,7 @@ const { rants } = await client.get("devrant/rants", {
 });
 ```
 
-### client.post(endpoint, parameters)
+### `client.post(endpoint, parameters)`
 
 Same return as `get()`.
 
@@ -148,7 +148,7 @@ await client.post('devrant/rants', {
 });
 ```
 
-### client.delete(endpoint, query_parameters)
+### `client.delete(endpoint, query_parameters)`
 
 Same return as `get()` and `post()`.
 
@@ -161,11 +161,11 @@ const client = DevRant.withCredentials('username', 'password');
 await client.delete('devrant/rants/12345');
 ```
 
-### client.setAuthToken(auth_token)
+### `client.setAuthToken(auth_token)`
 
 Sets the auth token to be used for authentication. An auth token object consists of the `id`, `key` and `user_id` properties.
 
-### client.getAuthToken()
+### `client.getAuthToken()`
 
 Returns the auth token used for authentication.
 
