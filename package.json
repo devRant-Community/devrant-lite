@@ -1,0 +1,73 @@
+{
+  "name": "devrant-lite",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Tiny, fully-featured REST client for the unofficial devRant API",
+  "author": "Skayo (https://skayo.dev)",
+  "homepage": "https://devrant-community.github.io/devrant-lite",
+  "source": "devrant.js",
+  "main": "dist/devrant.js",
+  "module": "dist/devrant.m.js",
+  "types": "index.d.ts",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "cross-fetch": "^3.1.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.4",
+    "bundlesize": "^0.18.1",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "flow-bin": "^0.123.0",
+    "husky": "^4.2.5",
+    "jest": "^25.5.0",
+    "microbundle": "^0.11.0",
+    "typescript": "^3.8.2"
+  },
+  "scripts": {
+    "lint": "eslint --fix ./",
+    "prepare": "microbundle devrant.js && bundlesize",
+    "test": "eslint --fix . && jest --detectOpenHandles",
+    "release": "npm run -s prepare && npm test && git tag $npm_package_version && git push && git push --tags && npm publish"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint --fix ."
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "bundlesize": [
+    {
+      "path": "dist/**.js",
+      "maxSize": "3 kB"
+    },
+    {
+      "path": "index.d.ts",
+      "maxSize": "3 kB"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/devRant-Community/devrant-lite/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devRant-Community/devrant-lite.git"
+  },
+  "keywords": [
+    "devrant",
+    "rest",
+    "api",
+    "devrant",
+    "api",
+    "node-devrant",
+    "rantscript",
+    "client"
+  ]
+}

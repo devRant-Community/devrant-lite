@@ -1,0 +1,29 @@
+name: Node CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x]
+
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v2
+      - name: 🔧 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: ♻ Install
+        run: npm install
+      - name: 👓 Lint
+        run: npm run lint
+      - name: ✔ Test
+        env:
+          DEVRANT_USERNAME: ${{ secrets.DEVRANT_USERNAME }}
+          DEVRANT_PASSWORD: ${{ secrets.DEVRANT_PASSWORD }}
+        if: env.DEVRANT_USERNAME
+        run: npm run test
