@@ -18,7 +18,7 @@ module.exports = {
 			code: 128,  // for GitHub
 			ignoreUrls: true, ignoreStrings: true, ignoreTemplateLiterals: true, ignoreRegExpLiterals: true,
 		}],
-		indent: ['error', 2],
+		indent: ['error', 'tab'],
 		semi: ['error', 'always'],
 		quotes: ['warn', 'single', { avoidEscape: true }],
 		'comma-dangle': ['warn', 'always-multiline'],

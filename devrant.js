@@ -175,10 +175,7 @@ class DevRant {
 	 * @throws Error
 	 */
 	setAuthToken(token) {
-		if (!token ||
-		    !token.hasOwnProperty('id') ||
-		    !token.hasOwnProperty('key') ||
-		    !token.hasOwnProperty('user_id')) {
+		if (!token || !token.id || !token.key || !token.user_id) {
 			throw new Error('One or more required properties are not set in the auth token!');
 		}
 
