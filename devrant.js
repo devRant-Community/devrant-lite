@@ -20,7 +20,7 @@ class DevRant {
 
 		const { auth_token } = await client.post('users/auth-token', {
 			username,
-			password
+			password,
 		});
 		client.setAuthToken(auth_token);
 

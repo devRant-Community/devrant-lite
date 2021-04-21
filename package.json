@@ -65,9 +65,9 @@
     "rest",
     "api",
     "devrant",
-    "api",
     "node-devrant",
     "rantscript",
-    "client"
+    "client",
+    "library"
   ]
 }
