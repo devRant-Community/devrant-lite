@@ -29,7 +29,7 @@ class DevRant {
 	}
 
 	/**
-	 * Parse the JSON from a Response object and add the hidden `headers` property
+	 * Parse the JSON from a Response object and add a hidden `headers` property
 	 *
 	 * @param {Response} response The Response object returned by Fetch
 	 * @return {Promise<object>}
