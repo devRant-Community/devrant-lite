@@ -7,12 +7,11 @@
  * @example
  * const DevRant = require('devrant-lite')
  *
- * const client = new DevRant({
- *  consumer_key: 'XYZ',
- *  consumer_secret: 'XYZ',
- *  access_token_key: 'XYZ',
- *  access_token_secret: 'XYZ'
- * });
+ * const client = DevRant.withAuthToken({
+ *   key: '123abcdefghijklmnopqrstuvxyz',
+ *   id: 12345678,
+ *   user_id: 12345
+ *  });
  *
  * @example
  * // Enable esModuleInterop in your tsconfig to import typings
@@ -37,7 +36,30 @@ export default class DevRant {
 	private _app: string;
 	private _plat: string;
 
-	constructor(options: TwitterOptions);
+	/**
+	 * Helper function to create a DevRant instance and login with user credentials
+	 *
+	 * @param {string} username Account name or email
+	 * @param {string} password Account password
+	 * @param {{baseUrl: string, app: number, plat: number}} options Options passed to the DevRant constructor
+	 * @return DevRant A new DevRant instance
+	 */
+	static withCredentials(username: string, password: string, options: DevRantOptions): Promise<DevRant>;
+
+	/**
+	 * Helper function to create DevRant instance and set an auth token
+	 *
+	 * @param {{id: number, key: string, user_id: number}} authToken Auth token
+	 * @param {{baseUrl: string, app: number, plat: number}} options Options passed to the DevRant constructor
+	 * @return DevRant A new DevRant instance
+	 */
+	static withAuthToken(authToken: AuthToken, options: DevRantOptions): Promise<DevRant>;
+
+	/**
+	 * Constructor
+	 * @param {{baseUrl: string, app: number, plat: number}} options
+	 */
+	constructor(options: DevRantOptions);
 
 	/**
 	 * Parse the JSON from a Response object and add a hidden `headers` property
@@ -96,12 +118,7 @@ export default class DevRant {
 	public delete<T = any>(resource: string, parameters?: object): Promise<T>;
 }
 
-interface TwitterOptions {
-	/**
-	 * Auth Token (usually returned from the `users/auth-token` endpoint)
-	 */
-	token: AuthToken | null,
-
+interface DevRantOptions {
 	/**
 	 * API Base URL (useful for proxying and testing)
 	 * @default https://devrant.com/api

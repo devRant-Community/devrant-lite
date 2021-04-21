@@ -8,14 +8,46 @@ const BASE_HEADERS = {
 class DevRant {
 
 	/**
+	 * Helper function to create a DevRant instance and login with user credentials
+	 *
+	 * @param {string} username Account name or email
+	 * @param {string} password Account password
+	 * @param {{baseUrl: string, app: number, plat: number}} options options Options passed to the DevRant constructor
+	 * @return DevRant A new DevRant instance
+	 */
+	static async withCredentials(username, password, options = {}) {
+		const client = new DevRant(options);
+
+		const { auth_token } = await client.post('users/auth-token', {
+			username,
+			password
+		});
+		client.setAuthToken(auth_token);
+
+		return client;
+	}
+
+	/**
+	 * Helper function to create DevRant instance and set an auth token
+	 *
+	 * @param {{id: number, key: string, user_id: number}} authToken Auth token
+	 * @param {{baseUrl: string, app: number, plat: number}} options Options passed to the DevRant constructor
+	 * @return DevRant A new DevRant instance
+	 */
+	static withAuthToken(authToken, options = {}) {
+		const client = new DevRant(options);
+		client.setAuthToken(authToken);
+
+		return client;
+	}
+
+	/**
 	 * @param {object} [options]
-	 * @param {string} [options.baseUrl] Base URL
-	 * @param {{id: number, key: string, user_id: number}|null} [options.token] Auth Token
-	 * @param {number} [options.app] App ID
-	 * @param {number} [options.plat] Platform ID
+	 * @param {string} [options.baseUrl="https://devrant.com/api"] Base URL
+	 * @param {number} [options.app=3] App ID
+	 * @param {number} [options.plat=3] Platform ID
 	 */
 	constructor({
-		token = null,
 		baseUrl = 'https://devrant.com/api',
 		app = 3,
 		plat = 3,
@@ -23,9 +55,6 @@ class DevRant {
 		this._baseUrl = baseUrl;
 		this._app = app;
 		this._plat = plat;
-		this._token = null;
-
-		if (token) this.setAuthToken(token);
 	}
 
 	/**
@@ -75,21 +104,18 @@ class DevRant {
 			},
 		};
 
-		let params = {
-			app:  this._app,
-			plat: this._plat,
-			...parameters,
-		};
+		parameters.app = this._app;
+		parameters.plat = this._plat;
 
 		if (this._token) {
 			const { key, id, user_id } = this._token;
 
-			params.token_key = key;
-			params.token_id = id;
-			params.user_id = user_id;
+			parameters.token_key = key;
+			parameters.token_id = id;
+			parameters.user_id = user_id;
 		}
 
-		const queryString = querystring.stringify(params);
+		const queryString = querystring.stringify(parameters);
 
 		if (method === 'GET') {
 			url += '?' + queryString;
