@@ -2,12 +2,12 @@
 
 Tiny, fully-featured REST client for the [unofficial devRant API](https://devrantapi.docs.apiary.io/).
 
-[![npm](https://img.shields.io/npm/v/devrant-lite.svg)](https://npm.im/devrant-lite) [![Node CI](https://github.com/devRant-Community/devrant-lite/actions/workflows/nodejs.yml/badge.svg)](https://github.com/devRant-Community/devrant-lite/actions/workflows/nodejs.yml)
+[![npm](https://img.shields.io/npm/v/devrant-lite.svg)](https://npm.im/devrant-lite) [![Node CI](https://github.com/Skayo/devrant-lite/actions/workflows/nodejs.yml/badge.svg)](https://github.com/Skayo/devrant-lite/actions/workflows/nodejs.yml)
 
 ## Features
 
 - Promise driven via Async / Await
-- [Typescript support](https://github.com/devRant-Community/devrant-lite/blob/main/index.d.ts)
+- [Typescript support](https://github.com/Skayo/devrant-lite/blob/main/index.d.ts)
 - Works both in Node and in browsers
 - Under 1kb
 - Minimal dependencies
